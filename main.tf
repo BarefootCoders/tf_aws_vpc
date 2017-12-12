@@ -61,6 +61,7 @@ resource "aws_db_subnet_group" "database" {
   count       = "${length(var.database_subnets) > 0 ? 1 : 0}"
 }
 
+/*
 resource "aws_subnet" "elasticache" {
   vpc_id            = "${aws_vpc.mod.id}"
   cidr_block        = "${var.elasticache_subnets[count.index]}"
@@ -75,6 +76,7 @@ resource "aws_elasticache_subnet_group" "elasticache" {
   subnet_ids  = ["${aws_subnet.elasticache.*.id}"]
   count       = "${length(var.elasticache_subnets) > 0 ? 1 : 0}"
 }
+*/
 
 resource "aws_subnet" "public" {
   vpc_id            = "${aws_vpc.mod.id}"
@@ -133,11 +135,13 @@ resource "aws_route_table_association" "database" {
   route_table_id = "${element(aws_route_table.private.*.id, count.index)}"
 }
 
+/*
 resource "aws_route_table_association" "elasticache" {
   count          = "${length(var.elasticache_subnets)}"
   subnet_id      = "${element(aws_subnet.elasticache.*.id, count.index)}"
   route_table_id = "${element(aws_route_table.private.*.id, count.index)}"
 }
+*/
 
 resource "aws_route_table_association" "public" {
   count          = "${length(var.public_subnets)}"

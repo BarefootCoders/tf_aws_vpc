@@ -14,6 +14,7 @@ output "public_subnets" {
   value = ["${aws_subnet.public.*.id}"]
 }
 
+/*
 output "elasticache_subnets" {
   value = ["${aws_subnet.elasticache.*.id}"]
 }
@@ -21,6 +22,7 @@ output "elasticache_subnets" {
 output "elasticache_subnet_group" {
   value = "${aws_elasticache_subnet_group.elasticache.id}"
 }
+*/
 
 output "vpc_id" {
   value = "${aws_vpc.mod.id}"
